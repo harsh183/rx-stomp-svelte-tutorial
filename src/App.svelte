@@ -1,6 +1,7 @@
 <script lang="ts">
   import { RxStomp, RxStompConfig } from "@stomp/rx-stomp"
   import { onMount } from "svelte"
+    import Status from "./Status.svelte"
 
   const rxStomp = new RxStomp()
   onMount(() => {
@@ -19,7 +20,7 @@
     }
 
     rxStomp.configure(rxStompConfig)
-    rxStomp.activate();
+    rxStomp.activate()
 
     return () => {
       rxStomp.deactivate()
@@ -29,6 +30,7 @@
 
 <main>
   <h1>Hello RxStomp x Svelte</h1>
+  <Status {rxStomp}/>
 </main>
 
 <style>
