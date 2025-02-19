@@ -1,7 +1,8 @@
 <script lang="ts">
   import { RxStomp, RxStompConfig } from "@stomp/rx-stomp"
   import { onMount } from "svelte"
-    import Status from "./Status.svelte"
+  import Status from "./Status.svelte"
+  import Chatroom from "./Chatroom.svelte"
 
   const rxStomp = new RxStomp()
   onMount(() => {
@@ -22,31 +23,26 @@
     rxStomp.configure(rxStompConfig)
     rxStomp.activate()
 
-    return () => {
-      rxStomp.deactivate()
-    }
+    return () => rxStomp.deactivate()
   })
+
+  let inChatroom = false
+  const toggleChatroom = () => inChatroom = !inChatroom
 </script>
 
 <main>
   <h1>Hello RxStomp x Svelte</h1>
   <Status {rxStomp}/>
-</main>
 
-<style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
-  }
-</style>
+  {#if inChatroom }
+    <button on:click={toggleChatroom}>
+      Leave chatroom!
+    </button>
+
+    <Chatroom {rxStomp} />
+  {:else}
+    <button on:click={toggleChatroom}>
+      Join Chatroom
+    </button>
+  {/if}
+</main>
