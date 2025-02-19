@@ -3,6 +3,28 @@
   import { onMount } from "svelte"
 
   const rxStomp = new RxStomp()
+  onMount(() => {
+    const rxStompConfig: RxStompConfig = {
+      brokerURL: "ws://localhost:15674/ws",
+      connectHeaders: {
+        login: "guest",
+        passcode: "guest",
+      },
+      debug: (msg) => {
+        console.log(new Date(), msg)
+      },
+      heartbeatIncoming: 0,
+      heartbeatOutgoing: 20000,
+      reconnectDelay: 200,
+    }
+
+    rxStomp.configure(rxStompConfig)
+    rxStomp.activate();
+
+    return () => {
+      rxStomp.deactivate()
+    }
+  })
 </script>
 
 <main>
