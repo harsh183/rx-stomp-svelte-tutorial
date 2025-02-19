@@ -1,6 +1,7 @@
 <script lang="ts">
   import { RxStomp } from "@stomp/rx-stomp"
   import type { ChatMessage } from "./types"
+  import Messages from "./Messages.svelte";
 
   export let rxStomp: RxStomp
 
@@ -26,3 +27,5 @@
 <input type="text" bind:value={message} />
 
 <button on:click={() => sendMessage({ userName, message })}>Send Message</button>
+
+<Messages {rxStomp} topic={CHATROOM_NAME} />
