@@ -2,6 +2,7 @@
   import type { RxStomp } from "@stomp/rx-stomp"
 
   export let rxStomp: RxStomp
+
   let message = ''
   let userName = `user${Math.floor(Math.random() * 1000)}`
 </script>

@@ -2,9 +2,9 @@
   import { RxStompState, type RxStomp } from "@stomp/rx-stomp"
   import { onMount } from "svelte"
 
-  let connectionStatus = ''
-
   export let rxStomp: RxStomp
+
+  let connectionStatus = ''
 
   onMount(() => {
     const statusSubscription = rxStomp.connectionState$.subscribe((state) => { 
