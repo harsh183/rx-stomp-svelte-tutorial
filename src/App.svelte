@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { RxStomp, RxStompConfig } from "@stomp/rx-stomp"
+  import { RxStomp, type RxStompConfig } from "@stomp/rx-stomp"
   import { onMount } from "svelte"
   import Status from "./Status.svelte"
   import Chatroom from "./Chatroom.svelte"
